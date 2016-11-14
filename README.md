@@ -24,7 +24,7 @@ The MoPub SDK is distributed as source code that you can include in your applica
 
   Includes everything you need to serve HTML and MRAID advertisements.  Third party ad networks and Native MoPub advertisements are not included.
 
-The current version of the SDK is 4.9.0
+The current version of the SDK is 4.11.0
 
 ## Integrate
 
@@ -36,15 +36,10 @@ More detailed class documentation is available in the repo under the `ClassDocum
 
 Please view the [changelog](https://github.com/mopub/mopub-ios-sdk/blob/master/CHANGELOG.md) for details.
 
-- **Modular SDK - publishers can download the base or base excluding native SDK package**
-- **Removed the full SDK bundle**
-- **iOS 10 compatibility updates**
-	- Rotating frequency capping ID for non-targeted ads under 'Limit Ad Tracking' setting
-	- Removed save picture and save to calendar MRAID functionality
-- **Removed iAd and InMobi adapters**
-- **Added Cocoapods module name: "MoPub"**
+- **The MoPub SDK now uses WKWebView to display ads when possible. Backwards compatibility for old OS versions is retained using UIWebView.**
+- **Native video start tracker now fires immediately upon successful video playback.**
 - **Bug fixes**
-  - Fixed an issue when multiple rewarded videos are loaded at the same time
+  - Native ads and native video ads now correctly fire impression trackers while scrolling.
 
 
 ### IMPORTANT 4.0 UPGRADE INSTRUCTIONS

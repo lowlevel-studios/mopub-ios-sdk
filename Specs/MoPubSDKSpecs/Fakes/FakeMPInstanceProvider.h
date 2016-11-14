@@ -33,9 +33,8 @@
 #import "MPRewardedVideoAdManager.h"
 #import "MPRewardedVideoAdapter.h"
 #import "MPRewardedVideoCustomEvent.h"
+#import "MPWebView.h"
 
-@class EKEventStore;
-@class EKEventEditViewController;
 @class MRVideoPlayerManager;
 @class MPMoviePlayerViewController;
 @class MRBundleManager;
@@ -62,7 +61,7 @@
 @property (nonatomic, strong) MPRewardedVideoCustomEvent *fakeMPRewardedVideoCustomEvent;
 
 #pragma mark - HTML Ads
-@property (nonatomic, strong) MPAdWebView *fakeMPAdWebView;
+@property (nonatomic, strong) MPWebView *fakeMPWebView;
 @property (nonatomic, strong) MPAdWebViewAgent *fakeMPAdWebViewAgent;
 
 #pragma mark - MRAID
@@ -70,10 +69,6 @@
 @property (nonatomic, strong) MRController *fakeMRController;
 @property (nonatomic, strong) MRBridge *fakeMRBridge;
 @property (nonatomic, strong) MRBundleManager *fakeMRBundleManager;
-@property (nonatomic, strong) UIWebView *fakeUIWebView;
-@property (nonatomic, strong) EKEventEditViewController *fakeEKEventEditViewController;
-@property (nonatomic, strong) EKEventStore *fakeEKEventStore;
-@property (nonatomic, strong) MRImageDownloader *fakeImageDownloader;
 @property (nonatomic, strong) MRVideoPlayerManager *fakeMRVideoPlayerManager;
 @property (nonatomic, strong) MPMoviePlayerViewController *fakeMoviePlayerViewController;
 @property (nonatomic, strong) MRNativeCommandHandler *fakeNativeCommandHandler;
@@ -103,5 +98,9 @@
 #pragma mark InMobi
 @property (nonatomic, strong) IMBanner *fakeIMAdView;
 @property (nonatomic, strong) IMInterstitial *fakeIMAdInterstitial;
+
+#pragma mark Build Fake MPWebViews
+- (MPWebView *)buildMPWebViewWithFrame:(CGRect)frame delegate:(id<MPWebViewDelegate>)delegate;
+- (MPWebView *)buildMPWebViewWithFrame:(CGRect)frame;
 
 @end

@@ -6,7 +6,7 @@
 //
 
 #import "MPInstanceProvider.h"
-#import "MPAdWebView.h"
+#import "MPWebView.h"
 #import "MPAdWebViewAgent.h"
 #import "MPInterstitialAdManager.h"
 #import "MPInterstitialCustomEventAdapter.h"
@@ -18,11 +18,8 @@
 #import "MPBannerCustomEvent.h"
 #import "MPBannerAdManager.h"
 #import "MPLogging.h"
-#import "MRImageDownloader.h"
 #import "MRBundleManager.h"
 #import "MRVideoPlayerManager.h"
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "MRNativeCommandHandler.h"
 #import "MRBridge.h"
@@ -209,13 +206,6 @@ static MPInstanceProvider *sharedAdProvider = nil;
 
 #pragma mark - HTML Ads
 
-- (MPAdWebView *)buildMPAdWebViewWithFrame:(CGRect)frame delegate:(id<UIWebViewDelegate>)delegate
-{
-    MPAdWebView *webView = [[MPAdWebView alloc] initWithFrame:frame];
-    webView.delegate = delegate;
-    return webView;
-}
-
 - (MPAdWebViewAgent *)buildMPAdWebViewAgentWithAdWebViewFrame:(CGRect)frame delegate:(id<MPAdWebViewAgentDelegate>)delegate
 {
     return [[MPAdWebViewAgent alloc] initWithAdWebViewFrame:frame delegate:delegate];
@@ -223,7 +213,7 @@ static MPInstanceProvider *sharedAdProvider = nil;
 
 #pragma mark - MRAID
 
-- (MPClosableView *)buildMRAIDMPClosableViewWithFrame:(CGRect)frame webView:(UIWebView *)webView delegate:(id<MPClosableViewDelegate>)delegate
+- (MPClosableView *)buildMRAIDMPClosableViewWithFrame:(CGRect)frame webView:(MPWebView *)webView delegate:(id<MPClosableViewDelegate>)delegate
 {
     MPClosableView *adView = [[MPClosableView alloc] initWithFrame:frame closeButtonType:MPClosableViewCloseButtonTypeTappableWithImage];
     adView.delegate = delegate;
@@ -255,35 +245,12 @@ static MPInstanceProvider *sharedAdProvider = nil;
     return controller;
 }
 
-- (MRBridge *)buildMRBridgeWithWebView:(UIWebView *)webView delegate:(id<MRBridgeDelegate>)delegate
+- (MRBridge *)buildMRBridgeWithWebView:(MPWebView *)webView delegate:(id<MRBridgeDelegate>)delegate
 {
     MRBridge *bridge = [[MRBridge alloc] initWithWebView:webView];
     bridge.delegate = delegate;
     bridge.shouldHandleRequests = YES;
     return bridge;
-}
-
-- (UIWebView *)buildUIWebViewWithFrame:(CGRect)frame
-{
-    return [[UIWebView alloc] initWithFrame:frame];
-}
-
-- (EKEventEditViewController *)buildEKEventEditViewControllerWithEditViewDelegate:(id<EKEventEditViewDelegate>)editViewDelegate
-{
-    EKEventEditViewController *controller = [[EKEventEditViewController alloc] init];
-    controller.editViewDelegate = editViewDelegate;
-    controller.eventStore = [self buildEKEventStore];
-    return controller;
-}
-
-- (EKEventStore *)buildEKEventStore
-{
-    return [[EKEventStore alloc] init];
-}
-
-- (MRImageDownloader *)buildMRImageDownloaderWithDelegate:(id<MRImageDownloaderDelegate>)delegate
-{
-    return [[MRImageDownloader alloc] initWithDelegate:delegate];
 }
 
 - (MRVideoPlayerManager *)buildMRVideoPlayerManagerWithDelegate:(id<MRVideoPlayerManagerDelegate>)delegate
